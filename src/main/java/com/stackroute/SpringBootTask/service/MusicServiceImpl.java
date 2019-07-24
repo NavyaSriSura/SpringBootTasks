@@ -75,7 +75,9 @@ public class MusicServiceImpl implements MusicService {
 
     @Override
     public List<Music> getByName(String name) {
-        return null;
+        List<Music> user_id = musicRepository.findTitleByName(name);
+
+        return user_id;
     }
 
 

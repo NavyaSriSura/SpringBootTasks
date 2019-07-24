@@ -15,5 +15,5 @@ public interface MusicService {
 
     public boolean updateById(Music music, int id);
 
-    public List<Music> getByName(String name);
+    public  List<Music>   getByName(String name);
 }

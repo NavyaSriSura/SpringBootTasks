@@ -76,8 +76,8 @@ public class MusicController {
     }
 
 
-    @GetMapping("/names/{name}")
-    public ResponseEntity<List<Music>> getByname(@PathVariable String name) {
+     @GetMapping("/names/{name}")
+    public  ResponseEntity<List<Music>> getByname(@PathVariable String name) {
         List<Music> musix = musicService.getByName(name);
         return new ResponseEntity<List<Music>>(musix, HttpStatus.OK);
     }
