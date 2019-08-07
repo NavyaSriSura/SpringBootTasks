@@ -21,6 +21,7 @@ public class MusicController {
     }
 
     @PostMapping("/music")
+
     public ResponseEntity<?> saveTrack(@RequestBody Music music) {
         ResponseEntity responseEntity;
         Music savedTrack = null;
@@ -37,9 +38,11 @@ public class MusicController {
         return responseEntity;
     }
 
+
     @GetMapping("/getAllTracks")
     public ResponseEntity<?> getAllTracks() {
         List<Music> musicList = musicService.getTrack();
+
         return new ResponseEntity<List<Music>>(musicList, HttpStatus.CREATED);
     }
 
@@ -59,6 +62,7 @@ public class MusicController {
     }
 
     @DeleteMapping("/delete/{id}")
+
     public ResponseEntity<?> deleteTrack(@PathVariable int id) {
         try {
             musicService.deleteById(id);
@@ -71,12 +75,14 @@ public class MusicController {
     @PutMapping("/update/{id}")
     public ResponseEntity<Music> updateTrack(@RequestBody Music music, @PathVariable int id) {
 
+
         if (musicService.updateById(music, id)) {
             return ResponseEntity.notFound().build();
         }
 
         return ResponseEntity.noContent().build();
     }
+
 
 
     @GetMapping("/music/{name}")

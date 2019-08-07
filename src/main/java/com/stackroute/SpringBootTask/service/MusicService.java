@@ -5,6 +5,7 @@ import com.stackroute.SpringBootTask.domain.Music;
 import java.util.List;
 
 public interface MusicService {
+
     public Music saveTrack(Music music);
 
     public List<Music> getTrack();

@@ -15,7 +15,11 @@
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
+<<<<<<< HEAD
 		<java.version>11</java.version>
+=======
+		<java.version>1.8</java.version>
+>>>>>>> 49b1cca20449248cc3e3d9ff45dd8a6465c1d40c
 	</properties>
 
 	<dependencies>
@@ -33,7 +37,15 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
+<<<<<<< HEAD
 
+=======
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>1.4.193</version>
+		</dependency>
+>>>>>>> 49b1cca20449248cc3e3d9ff45dd8a6465c1d40c
 
 	</dependencies>
 
