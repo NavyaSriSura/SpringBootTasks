@@ -5,9 +5,10 @@ import com.stackroute.SpringBootTask.domain.Music;
 import java.util.List;
 
 public interface MusicService {
-    public Music saveMusic(Music music);
 
-    public List<Music> getMusic();
+    public Music saveTrack(Music music);
+
+    public List<Music> getTrack();
 
     public Music getById(int id);
 
@@ -15,5 +16,5 @@ public interface MusicService {
 
     public boolean updateById(Music music, int id);
 
-    public  List<Music>   getByName(String name);
+    public List<Music> getByName(String name);
 }
