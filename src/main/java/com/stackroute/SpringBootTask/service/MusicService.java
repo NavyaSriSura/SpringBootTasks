@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface MusicService {
 
-    public Music saveTrack(Music music);
+    public Music saveMusic(Music music);
 
-    public List<Music> getTrack();
+    public List<Music> getMusic();
 
     public Music getById(int id);
 
