@@ -13,7 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("api/v1")
 public class MusicController {
-    public MusicService musicService;
+    private MusicService musicService;
 
     @Autowired
     public MusicController(MusicService musicService) {
@@ -22,14 +22,14 @@ public class MusicController {
 
     @PostMapping("/music")
 
-    public ResponseEntity<?> saveTrack(@RequestBody Music music) {
+    public ResponseEntity<?> saveMusic(@RequestBody Music music) {
         ResponseEntity responseEntity;
-        Music savedTrack = null;
+        Music savedMusic = null;
 
         try {
-            musicService.saveTrack(music);
+            musicService.saveMusic(music);
             responseEntity = new ResponseEntity("Succesfully created", HttpStatus.CREATED);
-            savedTrack = musicService.saveTrack(music);
+            savedMusic = musicService.saveMusic(music);
         } catch (Exception e) {
             responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.CONFLICT);
 
@@ -39,9 +39,9 @@ public class MusicController {
     }
 
 
-    @GetMapping("/getAllTracks")
-    public ResponseEntity<?> getAllTracks() {
-        List<Music> musicList = musicService.getTrack();
+    @GetMapping("/getAllMusics")
+    public ResponseEntity<?> getAllMusics() {
+        List<Music> musicList = musicService.getMusic();
 
         return new ResponseEntity<List<Music>>(musicList, HttpStatus.CREATED);
     }
@@ -61,9 +61,9 @@ public class MusicController {
         return new ResponseEntity<Music>(music, HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/music/{id}")
 
-    public ResponseEntity<?> deleteTrack(@PathVariable int id) {
+    public ResponseEntity<?> deleteMusic(@PathVariable int id) {
         try {
             musicService.deleteById(id);
         } catch (Exception e) {
@@ -72,8 +72,8 @@ public class MusicController {
         return new ResponseEntity<>("Track Deleted", HttpStatus.OK);
     }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<Music> updateTrack(@RequestBody Music music, @PathVariable int id) {
+    @PutMapping("/music/{id}")
+    public ResponseEntity<Music> updateMusic(@RequestBody Music music, @PathVariable int id) {
 
 
         if (musicService.updateById(music, id)) {
