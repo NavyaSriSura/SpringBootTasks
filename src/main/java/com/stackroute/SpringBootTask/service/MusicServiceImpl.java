@@ -3,7 +3,7 @@ package com.stackroute.SpringBootTask.service;
 import com.stackroute.SpringBootTask.domain.Music;
 import com.stackroute.SpringBootTask.repository.MusicRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.event.ContextRefreshedEvent;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,12 +11,13 @@ import java.util.Optional;
 
 @Service
 public class MusicServiceImpl implements MusicService {
-    String name1;
-    String comments1;
-    int rating1;
-    String name2;
-    String comments2;
-    int rating2;
+
+    private String name1;
+    private String comments1;
+    private int rating1;
+    private String name2;
+    private String comments2;
+    private int rating2;
     private MusicRepository musicRepository;
 
     @Autowired
@@ -33,16 +34,18 @@ public class MusicServiceImpl implements MusicService {
     }
 
     @Override
-    public Music saveMusic(Music music) {
+
+    public Music saveTrack(Music music) {
 
 
-        Music savedMusic = musicRepository.save(music);
+        Music savedTrack = musicRepository.save(music);
 
-        return savedMusic;
+        return savedTrack;
     }
 
     @Override
-    public List<Music> getMusic() {
+    public List<Music> getTrack() {
+
         return (List<Music>) musicRepository.findAll();
     }
 
@@ -75,9 +78,7 @@ public class MusicServiceImpl implements MusicService {
 
     @Override
     public List<Music> getByName(String name) {
-        List<Music> user_id = musicRepository.findTitleByName(name);
-
-        return user_id;
+        return null;
     }
 
 
