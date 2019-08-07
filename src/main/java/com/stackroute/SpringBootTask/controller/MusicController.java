@@ -21,14 +21,15 @@ public class MusicController {
     }
 
     @PostMapping("/music")
-    public ResponseEntity<?> saveMusic(@RequestBody Music music) {
+
+    public ResponseEntity<?> saveTrack(@RequestBody Music music) {
         ResponseEntity responseEntity;
-        Music savedMusic = null;
+        Music savedTrack = null;
 
         try {
-            musicService.saveMusic(music);
+            musicService.saveTrack(music);
             responseEntity = new ResponseEntity("Succesfully created", HttpStatus.CREATED);
-            savedMusic = musicService.saveMusic(music);
+            savedTrack = musicService.saveTrack(music);
         } catch (Exception e) {
             responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.CONFLICT);
 
@@ -37,10 +38,11 @@ public class MusicController {
         return responseEntity;
     }
 
-    @GetMapping("/user")
-    public ResponseEntity<?> getAllUsers() {
-        //return new ResponseEntity<List<Music>>(musicService.get(),HttpStatus.OK);
-        List<Music> musicList = musicService.getMusic();
+
+    @GetMapping("/getAllTracks")
+    public ResponseEntity<?> getAllTracks() {
+        List<Music> musicList = musicService.getTrack();
+
         return new ResponseEntity<List<Music>>(musicList, HttpStatus.CREATED);
     }
 
@@ -60,13 +62,19 @@ public class MusicController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public String deleteMusic(@PathVariable int id) {
-        musicService.deleteById(id);
-        return "Data deleted";
+
+    public ResponseEntity<?> deleteTrack(@PathVariable int id) {
+        try {
+            musicService.deleteById(id);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>("Track Deleted", HttpStatus.OK);
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<Music> updateMusix(@RequestBody Music music, @PathVariable int id) {
+    public ResponseEntity<Music> updateTrack(@RequestBody Music music, @PathVariable int id) {
+
 
         if (musicService.updateById(music, id)) {
             return ResponseEntity.notFound().build();
@@ -76,8 +84,9 @@ public class MusicController {
     }
 
 
-     @GetMapping("/names/{name}")
-    public  ResponseEntity<List<Music>> getByname(@PathVariable String name) {
+
+    @GetMapping("/music/{name}")
+    public ResponseEntity<List<Music>> getByname(@PathVariable String name) {
         List<Music> musix = musicService.getByName(name);
         return new ResponseEntity<List<Music>>(musix, HttpStatus.OK);
     }
