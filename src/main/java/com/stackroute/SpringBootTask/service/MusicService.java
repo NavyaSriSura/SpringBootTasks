@@ -11,9 +11,9 @@ public interface MusicService {
 
     public Music getById(int id);
 
-    public void deleteById(int id);
+    public Music deleteById(int id);
 
-    public boolean updateById(Music music, int id);
+    public Music updateById(Music music, int id);
 
-    public  List<Music>   getByName(String name);
+    public List<Music> getByName(String name);
 }
