@@ -1,3 +1,4 @@
+
 package com.stackroute.SpringBootTask.service;
 
 import com.stackroute.SpringBootTask.domain.Music;
@@ -72,10 +73,6 @@ public class MusicServiceImpl implements MusicService {
 
     }
 
-    @Override
-    public List<Music> getByName(String name) {
-        return null;
-    }
-
+    
 
 }
