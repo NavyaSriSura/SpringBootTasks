@@ -13,7 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("api/v1")
 public class MusicController {
-    public MusicService musicService;
+    private MusicService musicService;
 
     @Autowired
     public MusicController(MusicService musicService) {
@@ -21,6 +21,7 @@ public class MusicController {
     }
 
     @PostMapping("/music")
+
     public ResponseEntity<?> saveMusic(@RequestBody Music music) {
         ResponseEntity responseEntity;
         Music savedMusic = null;
@@ -37,10 +38,11 @@ public class MusicController {
         return responseEntity;
     }
 
-    @GetMapping("/track")
-    public ResponseEntity<?> getAllTracks() {
-        //return new ResponseEntity<List<Music>>(musicService.get(),HttpStatus.OK);
+
+    @GetMapping("/getAllMusics")
+    public ResponseEntity<?> getAllMusics() {
         List<Music> musicList = musicService.getMusic();
+
         return new ResponseEntity<List<Music>>(musicList, HttpStatus.CREATED);
     }
 
@@ -59,31 +61,28 @@ public class MusicController {
         return new ResponseEntity<Music>(music, HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/music/{id}")
 
-    public ResponseEntity<?> deleteTrack(@PathVariable int id) {
-        ResponseEntity responseEntity;
+    public ResponseEntity<?> deleteMusic(@PathVariable int id) {
         try {
             musicService.deleteById(id);
-            responseEntity = new ResponseEntity<>("Track Deleted", HttpStatus.OK);
-
         } catch (Exception e) {
-            responseEntity = new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         }
-        return responseEntity;
+        return new ResponseEntity<>("Track Deleted", HttpStatus.OK);
     }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<String> updateMusix(@RequestBody Music music, @PathVariable int id) {
-        ResponseEntity<String> responseEntity;
-        try {
-            musicService.updateById(music, id);
-            responseEntity = new ResponseEntity<String>("Update Successfull", HttpStatus.CREATED);
-        } catch (Exception ex) {
-            responseEntity = new ResponseEntity<String>(ex.getMessage(), HttpStatus.CONFLICT);
+    @PutMapping("/music/{id}")
+    public ResponseEntity<Music> updateMusic(@RequestBody Music music, @PathVariable int id) {
+
+
+        if (musicService.updateById(music, id)) {
+            return ResponseEntity.notFound().build();
         }
-        return responseEntity;
+
+        return ResponseEntity.noContent().build();
     }
+
 
 
     @GetMapping("/music/{name}")
