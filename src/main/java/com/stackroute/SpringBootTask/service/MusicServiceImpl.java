@@ -1,9 +1,9 @@
+
 package com.stackroute.SpringBootTask.service;
 
 import com.stackroute.SpringBootTask.domain.Music;
 import com.stackroute.SpringBootTask.repository.MusicRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,7 +11,6 @@ import java.util.Optional;
 
 @Service
 public class MusicServiceImpl implements MusicService {
-
     private String name1;
     private String comments1;
     private int rating1;
@@ -34,18 +33,16 @@ public class MusicServiceImpl implements MusicService {
     }
 
     @Override
+    public Music saveMusic(Music music) {
 
-    public Music saveTrack(Music music) {
 
+        Music savedMusic = musicRepository.save(music);
 
-        Music savedTrack = musicRepository.save(music);
-
-        return savedTrack;
+        return savedMusic;
     }
 
     @Override
-    public List<Music> getTrack() {
-
+    public List<Music> getMusic() {
         return (List<Music>) musicRepository.findAll();
     }
 
@@ -58,28 +55,24 @@ public class MusicServiceImpl implements MusicService {
 
 
     @Override
-    public void deleteById(int id) {
+    public Music deleteById(int id) {
         musicRepository.deleteById(id);
+        MusicService musicService = null;
+        return musicService.getById(id);
     }
 
     @Override
-    public boolean updateById(Music music, int id) {
+    public Music updateById(Music music, int id) {
+        Optional<Music> track = musicRepository.findById(id);
         Optional<Music> userOptional = musicRepository.findById(id);
-
         if (!userOptional.isPresent())
-            return false;
-
-
-        music.setId(id);
-
+            music.setId(id);
         musicRepository.save(music);
-        return true;
+        MusicService muzixService = null;
+        return muzixService.getById(id);
+
     }
 
-    @Override
-    public List<Music> getByName(String name) {
-        return null;
-    }
-
+    
 
 }
