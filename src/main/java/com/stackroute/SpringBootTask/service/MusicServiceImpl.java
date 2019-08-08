@@ -1,8 +1,8 @@
 package com.stackroute.SpringBootTask.service;
 
 import com.stackroute.SpringBootTask.domain.Music;
-import com.stackroute.SpringBootTask.exceptions.TrackAlreadyExistsException;
-import com.stackroute.SpringBootTask.exceptions.TrackNotFoundException;
+import com.stackroute.SpringBootTask.exceptions.MusicAlreadyExistsException;
+import com.stackroute.SpringBootTask.exceptions.MusicNotFoundException;
 import com.stackroute.SpringBootTask.repository.MusicRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -46,7 +46,7 @@ public class MusicServiceImpl implements MusicService {
     }
 
     @Override
-    public Music saveMusic(Music music) throws TrackAlreadyExistsException {
+    public Music saveMusic(Music music) throws MusicAlreadyExistsException {
 
 
         Music savedMusic = musicRepository.save(music);
@@ -60,7 +60,7 @@ public class MusicServiceImpl implements MusicService {
     }
 
     @Override
-    public Music getById(int id) throws TrackNotFoundException {
+    public Music getById(int id) throws MusicNotFoundException {
 
         Optional<Music> user_id = musicRepository.findById(id);
         return user_id.get();
